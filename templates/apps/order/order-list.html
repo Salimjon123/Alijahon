@@ -1,0 +1,97 @@
+{% extends 'apps/base/base-page.html' %}
+{% load i18n %}
+{% load humanize %}
+{% block body %}
+
+
+    <div class="card mb-3" id="ordersTable"
+         data-list='{"valueNames":["order","date","address","status","amount"],"page":10,"pagination":true}'>
+        <div class="card-header">
+            <div class="row flex-between-center">
+                <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
+                    <h5 class="fs-0 mb-0 text-nowrap py-2 py-xl-0">Orders</h5>
+                </div>
+                <div class="col-8 col-sm-auto ms-auto text-end ps-0">
+                    <div class="d-none" id="orders-bulk-actions">
+                        <div class="d-flex">
+                            <select class="form-select form-select-sm" aria-label="Bulk actions">
+                                <option selected="">Bulk actions</option>
+                                <option value="Refund">Refund</option>
+                                <option value="Delete">Delete</option>
+                                <option value="Archive">Archive</option>
+                            </select>
+                            <button class="btn btn-falcon-default btn-sm ms-2" type="button">Apply</button>
+                        </div>
+                    </div>
+                    <div id="orders-actions">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive scrollbar">
+                <table class="table table-sm table-striped fs--1 mb-0 overflow-hidden">
+                    <thead class="bg-200 text-900">
+                    <tr>
+                        <th>
+
+                        </th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="order">Order</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap pe-7" data-sort="date">Date</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap" data-sort="address"
+                            style="min-width: 12.5rem;">Ship To
+                        </th>
+                        <th class="sort pe-1 align-middle white-space-nowrap text-center" data-sort="status">Status</th>
+                        <th class="sort pe-1 align-middle white-space-nowrap text-end" data-sort="amount">Amount</th>
+                        <th class="no-sort"></th>
+                    </tr>
+                    </thead>
+                    <tbody class="list" id="table-orders-body">
+
+
+
+                    {% for order in orders %}
+                        <tr class="btn-reveal-trigger">
+                            <td class="align-middle" style="width: 28px;">
+
+                            </td>
+                            <td class="order py-2 align-middle white-space-nowrap"><a
+                                    href="../../../app/e-commerce/orders/order-details.html"> <strong>#{{ orders.pk }}</strong></a> by
+                                <strong>{{ order.fullname }}</strong><br/><a href="/">{{ order.phone_number }}</a>
+                            </td>
+                            <td class="date py-2 align-middle">{{ order.created_at|date:'d/m/Y ' }}</td>
+                            <td class="address py-2 align-middle white-space-nowrap">{{ order.district.region.name }},{{ order.district.name }}
+
+                            </td>
+                            <td class="status py-2 align-middle text-center fs-0 white-space-nowrap"><span
+                                    class="badge badge rounded-pill d-block badge-soft-success">{{ order.status }}<span
+                                    class="ms-1 fas fa-check" data-fa-transform="shrink-2"></span></span>
+                            </td>
+                            <td class="amount py-2 align-middle text-end fs-0 fw-medium">{{ order.total|floatformat:'0'|intcomma }}</td>
+                            <td class="py-2 align-middle white-space-nowrap text-end">
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

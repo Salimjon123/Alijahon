@@ -1,0 +1,74 @@
+{% extends 'apps/base/base-page.html' %}
+{% load i18n %}
+{% load humanize %}
+
+{% block body %}
+    <div class="card mb-3">
+        <div class="card-body">
+
+            <!-- Категории -->
+            <div class="container border-bottom pb-3">
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="{% url 'product-list' %}"
+                       class="btn btn-outline-primary {% if not c_slug %}active{% endif %}">
+                        {% translate 'All' %}
+                    </a>
+                    {% for category in categories %}
+                        <a href="{% url 'product-list' %}?category_slug={{ category.slug }}"
+                           class="btn btn-outline-primary {% if c_slug == category.slug %}active{% endif %}">
+                            {{ category.name }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Продукты -->
+            <div class="container mt-4" id="productsList">
+                <div class="row g-3">
+                    {% for product in products %}
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="card h-100 shadow-sm">
+                                <a href="{% url 'product-detail' product.slug %}">
+                                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                                </a>
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title mb-1">
+                                        <a href="{% url 'product-detail' product.slug %}"
+                                           class="text-dark text-decoration-none">
+                                            {{ product.name }}
+                                        </a>
+                                    </h5>
+                                    <p class="text-muted small mb-2">{{ product.category.name }}</p>
+                                    <h5 class="text-warning fw-bold mb-3">{{ product.price|intcomma }}</h5>
+
+                                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                                        <!-- Добавить в корзину -->
+                                        <a href="#" class="btn btn-sm btn-outline-primary"
+                                           data-bs-toggle="tooltip" title="{% translate 'Add to Cart' %}">
+                                            <i class="fas fa-cart-plus me-1"></i> {% translate 'Add to Cart' %}
+                                        </a>
+
+                                        <!-- Лайк кнопка как ссылка -->
+                                        <form method="post" action="{% url 'wishlist' product.pk %}">
+                                            {% csrf_token %}
+                                            <button type="submit"
+                                                    class="btn btn-sm {% if product.pk in request.user.wishlist_products %}btn-danger{% else %}btn-outline-danger{% endif %}"
+                                                    aria-label="{% translate 'Like' %}" title="{% translate 'Like' %}">
+                                                <i class="{% if product.pk in request.user.wishlist_products %}fas{% else %}far{% endif %} fa-heart"></i>
+                                            </button>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="col-12 text-center text-muted py-5">
+                            {% translate "No products found." %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

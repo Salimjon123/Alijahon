@@ -1,0 +1,50 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-26 18:01+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: apps/forms.py:31
+msgid "The password is incorrect."
+msgstr ""
+
+#: templates/apps/auth/auth-page.html:23
+msgid "Login"
+msgstr ""
+
+#: templates/apps/auth/auth-page.html:30
+msgid "Phone Number"
+msgstr ""
+
+#: templates/apps/auth/auth-page.html:36
+msgid "Password"
+msgstr ""
+
+#: templates/apps/auth/auth-page.html:52
+msgid "Term of use"
+msgstr ""
+
+#: templates/apps/base/base-page.html:160
+msgid "Main Page"
+msgstr ""
+
+#: templates/apps/base/base-page.html:167
+msgid "Products"
+msgstr ""
+
+#: templates/apps/product-list.html:10
+msgid "All"
+msgstr ""
