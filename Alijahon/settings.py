@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-nbwo%gwk_u**^80(kp%xce*e)s*pi*-a_%#lyt9_2u%^1vo8-2'
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 LOGIN_URL = 'auth'
 LOGIN_REDIRECT_URL = '/'
